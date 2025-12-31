@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  parabank:
+    image: parasoft/parabank
+    container_name: parabank-server
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/parabank/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+    networks:
+      - parabank-network
+
+  parabank-init:
+    image: curlimages/curl:latest
+    container_name: parabank-initializer
+    depends_on:
+      parabank:
+        condition: service_healthy
+    command: >
+      sh -c "sleep 20 && curl -f -X POST http://parabank:8080/parabank/services/bank/initializeDB -H 'accept: application/xml'"
+    networks:
+      - parabank-network
+    restart: "no"
+
+networks:
+  parabank-network:
+    driver: bridge
