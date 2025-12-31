@@ -4,8 +4,7 @@
   "description": "Teste técnico - Auvo Tecnologia",
   "main": "index.js",
   "scripts": {
-    "setup": "node scripts/setup-env.js",
-    "test": "cross-env TEST_ENV=public npm test",
+    "test": "cross-env TEST_ENV=public BASE_URL=https://parabank.parasoft.com/parabank playwright test",
     "test:ui": "cross-env TEST_ENV=public playwright test --ui",
     "test:report": "playwright show-report",
     "test:local": "cross-env TEST_ENV=local playwright test"
