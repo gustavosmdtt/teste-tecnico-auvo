@@ -33,6 +33,11 @@ npx playwright install chromium
 
 ### 3. Escolha o ambiente de testes
 
+#### Antes de avançar, lembre de adicionar as variáveis de ambiente
+```bash
+cp .env.example .env
+```
+
 #### Opção A: Ambiente Público (padrão)
 ```bash
 npm test
