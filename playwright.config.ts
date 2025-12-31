@@ -1,27 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
 
-if (!process.env.TEST_ENV && !process.env.CI) {
-    require('dotenv').config();
-}
+dotenv.config();
 
-const getBaseURL = (): string => {
-  if (process.env.BASE_URL) {
-    return process.env.BASE_URL;
-  }
-
-  const testEnv = process.env.TEST_ENV || 'public';
-
-  if (testEnv === 'local') {
-    return 'http://localhost:8080/parabank';
-  }
-
-  return 'https://parabank.parasoft.com/parabank';
-};
-
-const BASE_URL = getBaseURL();
 if (!process.env.CONFIG_LOGGED) {
   console.log(`\n[CONFIG] TEST_ENV: ${process.env.TEST_ENV || 'public'}`);
-  console.log(`[CONFIG] BASE_URL: ${BASE_URL}\n`);
+  console.log(`[CONFIG] BASE_URL: ${process.env.BASE_URL}\n`);
   process.env.CONFIG_LOGGED = 'true';
 }
 
@@ -37,7 +21,7 @@ export default defineConfig({
     ['json', { outputFile: 'test-results/test-results.json' }],
   ],
   use: {
-    baseURL: BASE_URL,
+    baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
