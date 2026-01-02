@@ -96,10 +96,7 @@ npm run test:report
 ### 3. Gestão de Dados de Teste
 - Arquivo fixtures com dados pessoais e credenciais de acesso do usuário, para serem consumidos durante os testes
 
-### 4. Sem variáveis de ambiente
-- Ambiente público com URL e API pública
-
-### 5. Docker
+### 4. Docker
 - Estável e manipulável
 - Perfeito para desenvolvimento dos testes
 
